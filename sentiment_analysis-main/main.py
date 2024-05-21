@@ -191,7 +191,7 @@ elif nav_option == 'Analyze CSV':
         else:
             st.warning("The uploaded CSV file is empty. Please upload a valid CSV file.")
 
-elif nav_option == 'Analyze YouTube Video':
+elif nav_option == 'Analyze YouTube Video(Under development will update soon :) )':
     st.header('Analyze YouTube Video')
     youtube_url = st.text_input('Enter YouTube video URL:')
     if youtube_url:
