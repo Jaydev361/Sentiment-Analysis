@@ -14,13 +14,13 @@ favicon_path = "favicon.png"  # Ensure this matches your favicon file name
 st.set_page_config(page_title="My Sentiment Analysis App", page_icon=favicon_path)
 # Load environment variables from .env file
 load_dotenv()
-# hide_st_style = """
-#             <style>
-#             #MainMenu {visibility: hidden;}
-#             footer {visibility: hidden;}
-#             </style>
-#             """
-# st.markdown(hide_st_style, unsafe_allow_html=True)
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 # Function to perform enhanced text cleaning
 def clean_text_enhanced(text):
     text = text.lower()
