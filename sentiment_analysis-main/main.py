@@ -9,7 +9,6 @@ import re
 import requests
 # Set the path to your custom favicon
 favicon_path = "favicon.png"  # Ensure this matches your favicon file name
-
 # Change title and favicon
 st.set_page_config(page_title="My Sentiment Analysis App", page_icon=favicon_path)
 # Load environment variables from .env file
@@ -52,9 +51,9 @@ def analyze_youtube_video(url):
         video_id = parse_qs(parsed_url.query).get('v')
         if video_id:
             video_id = video_id[0]
-            youtube_api_key = os.getenv('YOUTUBE_API_KEY')
+            youtube_api_key = st.secrets["YOUTUBE_API_KEY"]
             if not youtube_api_key:
-                st.error("YouTube API key not found. Please make sure to set it in the .env file.")
+                st.error("YouTube API key not found. Please make sure to set it in the Streamlit secrets.")
                 return
 
             comments = fetch_youtube_comments(video_id, youtube_api_key)
