@@ -6,13 +6,17 @@ from textblob import TextBlob
 import googleapiclient.discovery
 from urllib.parse import urlparse, parse_qs
 import re
-import requests
+
 # Set the path to your custom favicon
 favicon_path = "favicon.png"  # Ensure this matches your favicon file name
+
 # Change title and favicon
-st.set_page_config(page_title="My Sentiment Analysis App", page_icon=favicon_path)
+st.set_page_config(page_title="Sentiment Analysis App", page_icon=favicon_path)
+
 # Load environment variables from .env file
 load_dotenv()
+
+# Hide Streamlit style elements
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
@@ -20,6 +24,7 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # Function to perform enhanced text cleaning
 def clean_text_enhanced(text):
     text = text.lower()
@@ -44,14 +49,21 @@ def classify_sentiment(score):
 def score_sentiment(text):
     return round(TextBlob(text).sentiment.polarity, 2)
 
+# Function to extract video ID from different YouTube URL formats
+def extract_video_id(url):
+    parsed_url = urlparse(url)
+    if parsed_url.hostname in ['www.youtube.com', 'youtube.com', 'm.youtube.com']:
+        return parse_qs(parsed_url.query).get('v', [None])[0]
+    elif parsed_url.hostname in ['youtu.be']:
+        return parsed_url.path[1:]
+    return None
+
 # Updated function to analyze YouTube video using YouTube Data API
 def analyze_youtube_video(url):
     try:
-        parsed_url = urlparse(url)
-        video_id = parse_qs(parsed_url.query).get('v')
+        video_id = extract_video_id(url)
         if video_id:
-            video_id = video_id[0]
-            youtube_api_key = st.secrets["YOUTUBE_API_KEY"]
+            youtube_api_key = st.secrets['YOUTUBE_API_KEY'] # Use Streamlit secrets to get the YouTube API key
             if not youtube_api_key:
                 st.error("YouTube API key not found. Please make sure to set it in the Streamlit secrets.")
                 return
@@ -98,6 +110,8 @@ def analyze_youtube_video(url):
                 )
             else:
                 st.warning("No comments found for the given YouTube video.")
+        else:
+            st.error("Invalid YouTube URL.")
         return None
     except Exception as e:
         st.error(f"Error: {e}")
@@ -191,7 +205,7 @@ elif nav_option == 'Analyze CSV':
             st.warning("The uploaded CSV file is empty. Please upload a valid CSV file.")
 
 elif nav_option == 'Analyze YouTube Video':
-    st.header('Analyze YouTube Video(Under development will update soon :) )')
+    st.header('Analyze YouTube Video')
     youtube_url = st.text_input('Enter YouTube video URL:')
     if youtube_url:
         analyze_youtube_video(youtube_url)
