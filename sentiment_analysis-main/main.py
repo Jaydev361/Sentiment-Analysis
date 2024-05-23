@@ -11,7 +11,7 @@ import re
 favicon_path = "favicon.png"  # Ensure this matches your favicon file name
 
 # Change title and favicon
-st.set_page_config(page_title="Sentiment Analysis App", page_icon=favicon_path)
+st.set_page_config(page_title="Sentiment Analysis Tool", page_icon=favicon_path)
 
 # Load environment variables from .env file
 load_dotenv()
