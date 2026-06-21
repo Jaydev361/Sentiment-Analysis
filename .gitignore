@@ -1,0 +1,53 @@
+﻿# Secrets and local config
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Streamlit
+.streamlit/cache/
+
+# Hugging Face / model caches
+models/
+.cache/
+huggingface/
+
+# Data exports and local uploads
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.jsonl
+analyzed_*.csv
+
+# Logs
+*.log
+logs/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
