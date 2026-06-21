@@ -5,7 +5,7 @@
 Use Python 3.10 or newer.
 
 ```powershell
-cd C:\Users\jayde\OneDrive\Desktop\multilingual_sentiment_app
+cd PATH_TO_YOUR_PROJECT_FOLDER
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
